@@ -59,11 +59,11 @@ router.get("/", async function (req, res) {
 
   if (req.query.city) {
     if (req.query.area) {
-      if (req.query.pipeId) {
+      if (req.query.pipeID) {
         data = await pipeData.find({
           city: req.query.city,
           area: req.query.area,
-          pipeID: req.query.pipeId,
+          pipeID: req.query.pipeID,
         });
       } else
         data = await pipeData.find({
@@ -78,11 +78,29 @@ router.get("/", async function (req, res) {
   res.send(data);
 });
 
+router.post("/", async function (req, res) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  let data = await pipeData.find({
+    city: req.body.city,
+    area: req.body.area,
+    pipeID: req.body.pipeID,
+  });
+  if (data.length != 0) {
+    res.status(400).send("BAD REQUEST");
+  } else {
+    data = new pipeData(req.body);
+    data = await data.save();
+    res.status(200).send(data);
+  }
+});
+
 function validate(data) {
+  let responce;
   const schema = Joi.object({
-    city: Joi.string().min(3).max(12).required(),
-    area: Joi.string().min(3).max(12).required(),
-    pipeID: Joi.number().integer().min(0),
+    city: Joi.string().min(3).max(30).required(),
+    area: Joi.string().min(3).max(30).required(),
+    pipeID: Joi.number().integer().min(0).required(),
     sensorValues: Joi.object({
       ph: Joi.number().min(0).max(14),
       temperature: Joi.number().required(),
@@ -92,7 +110,8 @@ function validate(data) {
     }),
     dateModified: Joi.date(),
   });
-  return Joi.validate(data, schema);
+
+  return schema.validate(data);
 }
 
 module.exports = router;
