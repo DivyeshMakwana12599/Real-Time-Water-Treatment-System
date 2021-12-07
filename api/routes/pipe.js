@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 router.use(express.json());
 
-const pipeDataSchema = new mongoose.Schema({
+const PipeDataSchema = new mongoose.Schema({
   city: {
     type: String,
     required: true,
@@ -52,7 +52,7 @@ const pipeDataSchema = new mongoose.Schema({
   },
 });
 
-pipeData = mongoose.model("pipeData", pipeDataSchema);
+PipeData = mongoose.model("PipeData", PipeDataSchema);
 
 router.get("/", async function (req, res) {
   let data;
@@ -60,18 +60,18 @@ router.get("/", async function (req, res) {
   if (req.query.city) {
     if (req.query.area) {
       if (req.query.pipeID) {
-        data = await pipeData.find({
+        data = await PipeData.find({
           city: req.query.city,
           area: req.query.area,
           pipeID: req.query.pipeID,
         });
       } else
-        data = await pipeData.find({
+        data = await PipeData.find({
           city: req.query.city,
           area: req.query.area,
         });
-    } else data = await pipeData.find({ city: req.query.city });
-  } else data = await pipeData.find();
+    } else data = await PipeData.find({ city: req.query.city });
+  } else data = await PipeData.find();
 
   if (data.length === 0) return res.status(404).send("data not found :(");
 
@@ -81,7 +81,7 @@ router.get("/", async function (req, res) {
 router.post("/", async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  let data = await pipeData.find({
+  let data = await PipeData.find({
     city: req.body.city,
     area: req.body.area,
     pipeID: req.body.pipeID,
@@ -89,14 +89,43 @@ router.post("/", async function (req, res) {
   if (data.length != 0) {
     res.status(400).send("BAD REQUEST");
   } else {
-    data = new pipeData(req.body);
+    data = new PipeData(req.body);
     data = await data.save();
-    res.status(200).send(data);
+    res.status(200).send("done");
+  }
+});
+
+router.put("/", async function (req, res) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  let data = await PipeData.find({
+    city: req.body.city,
+    area: req.body.area,
+    pipeID: req.body.pipeID,
+  });
+  if (data.length === 0) res.status(404).send("NOT FOUND");
+  else {
+    data = await PipeData.findByIdAndUpdate(data[0]._id, req.body);
+    res.status(200).send("done");
+  }
+});
+
+router.delete("/", async function (req, res) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  let data = await PipeData.find({
+    city: req.body.city,
+    area: req.body.area,
+    pipeID: req.body.pipeID,
+  });
+  if (data.length === 0) res.status(400).send("BAD REQUEST");
+  else {
+    data = await PipeData.findByIdAndRemove(data[0]._id, req.body);
+    res.status(200).send("done");
   }
 });
 
 function validate(data) {
-  let responce;
   const schema = Joi.object({
     city: Joi.string().min(3).max(30).required(),
     area: Joi.string().min(3).max(30).required(),
@@ -117,7 +146,7 @@ function validate(data) {
 module.exports = router;
 
 // async function creatingData() {
-//   let data = new pipeData({
+//   let data = new PipeData({
 //     city: "Umbergaon",
 //     area: "NEW GIDC Colony",
 //     pipeID: 0,
@@ -130,7 +159,7 @@ module.exports = router;
 // }
 
 // async function findingData() {
-//   const data = await pipeData
+//   const data = await PipeData
 //     .find({ city: "Rajkot" })
 //     .select({ city: 1, area: 1, sensorValues: 1 });
 //   console.log(data);
