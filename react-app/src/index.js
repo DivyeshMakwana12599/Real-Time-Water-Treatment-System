@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom'
 import './index.css'
+import check from './images/thumb.png'
+import cross from './images/x-mark-xxl.png'
 
 const data = [
   {
@@ -41,8 +43,10 @@ function DataTable() {
   )
 }
 function checkState({ temperature }) {
-  if (temperature === 30) return ['True', 'item-green']
-  else return ['False', 'item-red']
+  const FILTERED = ['FILTERED', 'item-green', check]
+  const CONTAMINATED = ['CONTAMINATED', 'item-red', cross]
+  if (temperature === 30) return FILTERED
+  else return CONTAMINATED
 }
 function TableItem(props) {
   const { city, area, pipeID, sensorValues, className } = props
@@ -59,6 +63,7 @@ function TableItem(props) {
         }
       >
         <p>{state[0]}</p>
+        {/* <img src={state[2]} alt='water not contaminated' /> */}
       </div>
     </div>
   )

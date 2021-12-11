@@ -6,24 +6,26 @@
 
 body {
   position: relative;
-  background: #bedde9;
+  background: #fff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .table-header {
-  background: #e69dae;
+  background: #6aace9;
   display: flex;
   width: 50%;
-  height: 3rem;
+  height: auto;
   border-radius: 1rem 1rem 0 0;
+  font-weight: bolder;
 }
 .header-content {
   margin-top: 1rem;
   color: #fff;
   width: 50%;
-  height: 100%;
+  height: auto;
   margin: auto;
+  padding: 0.5rem 0;
   font-size: large;
   text-align: center;
   border: 3px solid #aaa;
@@ -31,7 +33,7 @@ body {
 }
 .header-content p,
 .item-content p {
-  display: table-cell;
+  display: inline;
   vertical-align: middle;
 }
 .header-left {
@@ -60,6 +62,14 @@ body {
 }
 .item-right {
   border-left: none;
+  padding: 0.5rem 0;
+  font-weight: bold;
+}
+.item-right img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
 .last-item {
@@ -72,6 +82,7 @@ body {
   border-radius: 0 0 1rem 0;
 }
 .table {
+  overflow-wrap: break-word;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -84,4 +95,10 @@ body {
 
 .item-green {
   background: #88c879;
+}
+@media only screen and (max-width: 800px) {
+  .table-header,
+  .table-item {
+    width: 90%;
+  }
 }

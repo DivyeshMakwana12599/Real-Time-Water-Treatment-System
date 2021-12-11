@@ -1,9 +1,9 @@
-const express = require("express");
-const Joi = require("joi");
-const router = express.Router();
-const mongoose = require("mongoose");
+const express = require('express')
+const Joi = require('joi')
+const router = express.Router()
+const mongoose = require('mongoose')
 
-router.use(express.json());
+router.use(express.json())
 
 const PipeDataSchema = new mongoose.Schema({
   city: {
@@ -22,40 +22,35 @@ const PipeDataSchema = new mongoose.Schema({
 
   sensorValues: {
     ph: {
-      type: Number,
+      type: [Number],
       required: false,
-      default: null,
     },
     temperature: {
-      type: Number,
+      type: [Number],
       required: true,
     },
     orp: {
-      type: Number,
+      type: [Number],
       required: false,
-      default: null,
     },
     turbidity: {
-      type: Number,
+      type: [Number],
       required: false,
-      default: null,
     },
     conductivity: {
-      type: Number,
+      type: [Number],
       required: false,
-      default: null,
     },
   },
   dateModified: {
-    type: Date,
-    default: Date.now,
+    type: [Date],
   },
-});
+})
 
-PipeData = mongoose.model("PipeData", PipeDataSchema);
+PipeData = mongoose.model('PipeData', PipeDataSchema)
 
-router.get("/", async function (req, res) {
-  let data;
+router.get('/', async function (req, res) {
+  let data
 
   if (req.query.city) {
     if (req.query.area) {
@@ -64,66 +59,110 @@ router.get("/", async function (req, res) {
           city: req.query.city,
           area: req.query.area,
           pipeID: req.query.pipeID,
-        });
+        })
       } else
         data = await PipeData.find({
           city: req.query.city,
           area: req.query.area,
-        });
-    } else data = await PipeData.find({ city: req.query.city });
-  } else data = await PipeData.find();
+        })
+    } else data = await PipeData.find({ city: req.query.city })
+  } else data = await PipeData.find()
 
-  if (data.length === 0) return res.status(404).send("data not found :(");
+  if (data.length === 0) return res.status(404).send('data not found :(')
 
-  res.send(data);
-});
+  res.send(data)
+})
 
-router.post("/", async function (req, res) {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  let data = await PipeData.find({
+router.post('/', async function (req, res) {
+  const { error } = validate(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
+  req.body = formatData(req.body)
+  const data = await PipeData.find({
     city: req.body.city,
     area: req.body.area,
     pipeID: req.body.pipeID,
-  });
+  })
+
   if (data.length != 0) {
-    res.status(400).send("BAD REQUEST");
+    res.status(400).send('BAD REQUEST')
   } else {
-    data = new PipeData(req.body);
-    data = await data.save();
-    res.status(200).send("done");
+    req.body = formatDataForPost(req.body)
+    const result = await new PipeData(req.body).save()
+    res.status(200).send('done')
   }
-});
+})
 
-router.put("/", async function (req, res) {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.put('/', async function (req, res) {
+  const { error } = validate(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
+  const data = await PipeData.find({
+    city: req.body.city,
+    area: req.body.area,
+    pipeID: req.body.pipeID,
+  })
+  if (data.length === 0) res.status(404).send('NOT FOUND')
+  else {
+    req.body = formatDataForPut(data[0], req.body)
+    await PipeData.findByIdAndUpdate(data[0]._id, req.body)
+    res.status(200).send('done')
+  }
+})
+
+router.delete('/', async function (req, res) {
+  const { error } = validate(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
   let data = await PipeData.find({
     city: req.body.city,
     area: req.body.area,
     pipeID: req.body.pipeID,
-  });
-  if (data.length === 0) res.status(404).send("NOT FOUND");
+  })
+  if (data.length === 0) res.status(400).send('BAD REQUEST')
   else {
-    data = await PipeData.findByIdAndUpdate(data[0]._id, req.body);
-    res.status(200).send("done");
+    await PipeData.findByIdAndRemove(data[0]._id, req.body)
+    res.status(200).send('done')
   }
-});
+})
 
-router.delete("/", async function (req, res) {
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  let data = await PipeData.find({
-    city: req.body.city,
-    area: req.body.area,
-    pipeID: req.body.pipeID,
-  });
-  if (data.length === 0) res.status(400).send("BAD REQUEST");
-  else {
-    data = await PipeData.findByIdAndRemove(data[0]._id, req.body);
-    res.status(200).send("done");
+function formatData(data) {
+  if (data.sensorValues.temperature === undefined) {
+    data.sensorValues.temperature = null
   }
-});
+  if (data.sensorValues.ph === undefined) {
+    data.sensorValues.ph = null
+  }
+  if (data.sensorValues.orp === undefined) {
+    data.sensorValues.orp = null
+  }
+  if (data.sensorValues.turbidity === undefined) {
+    data.sensorValues.turbidity = null
+  }
+  if (data.sensorValues.conductivity === undefined) {
+    data.sensorValues.conductivity = null
+  }
+  return data
+}
+
+function formatDataForPost(data) {
+  formatData(data)
+  data.sensorValues.temperature = [data.sensorValues.temperature]
+  data.sensorValues.ph = [data.sensorValues.ph]
+  data.sensorValues.orp = [data.sensorValues.orp]
+  data.sensorValues.turbidity = [data.sensorValues.turbidity]
+  data.sensorValues.conductivity = [data.sensorValues.conductivity]
+  data.dateModified = [Date.now()]
+  return data
+}
+
+function formatDataForPut(prevData, data) {
+  formatData(data)
+  prevData.sensorValues.temperature.push(data.sensorValues.temperature)
+  prevData.sensorValues.ph.push(data.sensorValues.ph)
+  prevData.sensorValues.orp.push(data.sensorValues.orp)
+  prevData.sensorValues.conductivity.push(data.sensorValues.conductivity)
+  prevData.sensorValues.turbidity.push(data.sensorValues.turbidity)
+  prevData.dateModified.push(new Date())
+  return prevData
+}
 
 function validate(data) {
   const schema = Joi.object({
@@ -138,12 +177,12 @@ function validate(data) {
       conductivity: Joi.number().min(0).max(1000),
     }),
     dateModified: Joi.date(),
-  });
+  })
 
-  return schema.validate(data);
+  return schema.validate(data)
 }
 
-module.exports = router;
+module.exports = router
 
 // async function creatingData() {
 //   let data = new PipeData({
