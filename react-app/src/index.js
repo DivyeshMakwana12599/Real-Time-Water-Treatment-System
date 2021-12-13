@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-const url = 'https://water-treatment-system-api.herokuapp.com'
+const url = 'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com'
 
 function DataTable() {
   const [data, setData] = useState([])
