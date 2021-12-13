@@ -1,5 +1,4 @@
 {
-  "proxy" : "https://water-treatment-system-api.herokuapp.com",
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
