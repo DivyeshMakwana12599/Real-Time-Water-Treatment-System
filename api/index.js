@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const homepage = require('./routes/homepage')
 const pipe = require('./routes/pipe')
+require('dotenv').config()
 
 const app = express()
 
@@ -11,7 +12,9 @@ app.use('/api/pipe', pipe)
 const port = process.env.PORT || 3001
 
 mongoose
-  .connect('mongodb://localhost/pipe-data')
+  .connect(
+    'mongodb+srv://d1vyesh:divyesh12599@pipe.gxndf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  )
   .then(() => console.log('Connected to mongodb...'))
   .catch((err) => console.error('Error connecting to server...', err))
 

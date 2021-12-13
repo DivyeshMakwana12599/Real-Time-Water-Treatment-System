@@ -1,51 +1,63 @@
+import { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import check from './images/thumb.png'
-import cross from './images/x-mark-xxl.png'
-
-const data = [
-  {
-    city: 'Umbergaon',
-    area: 'New GIDC',
-    pipeID: 1,
-    sensorValues: {
-      temperature: 30,
-    },
-  },
-  {
-    city: 'Rajkot',
-    area: 'SorathiaWadi',
-    pipeID: 0,
-    sensorValues: {
-      temperature: 35,
-    },
-  },
-  {
-    city: 'Vapi',
-    area: 'Char Rasta',
-    pipeID: 3,
-    sensorValues: {
-      temperature: 31,
-    },
-  },
-]
-
 function DataTable() {
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  async function getData() {
+    try {
+      const responce = await fetch('/api/pipe')
+      const result = await responce.json()
+      setData(result)
+      setIsLoading(false)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <section className='table'>
       <TableHeader />
       {data.map((item, index) => {
-        console.log(item, index)
+        console.log(item)
         if (index === data.length - 1) item.className = 'last-item'
-        return <TableItem {...item} key={item.pipeID} />
+        return <TableItem {...item} key={item._id} />
       })}
+      <Loading isLoading={isLoading} />
+      <button
+        type='button'
+        onClick={() => {
+          setData([])
+          setIsLoading(true)
+          getData()
+        }}
+        className='table-btn'
+      >
+        Refresh
+      </button>
     </section>
   )
 }
+
+function Loading({ isLoading }) {
+  console.log(isLoading)
+  if (isLoading) {
+    return (
+      <>
+        <div className='loading'>Loading...</div>
+      </>
+    )
+  }
+  return <></>
+}
 function checkState({ temperature }) {
-  const FILTERED = ['FILTERED', 'item-green', check]
-  const CONTAMINATED = ['CONTAMINATED', 'item-red', cross]
-  if (temperature === 30) return FILTERED
+  const FILTERED = ['FILTERED', 'item-green']
+  const CONTAMINATED = ['CONTAMINATED', 'item-red']
+  if (temperature[temperature.length - 1] === 30) return FILTERED
   else return CONTAMINATED
 }
 function TableItem(props) {
