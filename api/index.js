@@ -2,13 +2,18 @@ const express = require('express')
 const mongoose = require('mongoose')
 const homepage = require('./routes/homepage')
 const pipe = require('./routes/pipe')
+const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
 
 app.use('/', homepage)
 app.use('/api/pipe', pipe)
-
+app.use(
+  cors({
+    origin: 'https://water-treatment-system.netlify.app',
+  })
+)
 const port = process.env.PORT || 3001
 
 mongoose
