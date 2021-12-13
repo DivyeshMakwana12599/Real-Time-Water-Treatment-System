@@ -11,7 +11,7 @@ app.use('/', homepage)
 app.use('/api/pipe', pipe)
 app.use(
   cors({
-    origin: 'https://water-treatment-system.netlify.app',
+    origin: '*',
   })
 )
 const port = process.env.PORT || 3001
