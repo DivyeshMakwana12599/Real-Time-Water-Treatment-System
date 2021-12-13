@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+const url = 'https://water-treatment-system-api.herokuapp.com'
+
 function DataTable() {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   async function getData() {
     try {
-      const responce = await fetch('/api/pipe')
+      const responce = await fetch(url + '/api/pipe')
       const result = await responce.json()
       setData(result)
       setIsLoading(false)
