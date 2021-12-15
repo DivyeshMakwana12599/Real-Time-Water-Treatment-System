@@ -11,82 +11,74 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.table-header {
-  background: #6aace9;
-  display: flex;
-  width: 50%;
-  height: auto;
-  border-radius: 1rem 1rem 0 0;
-  font-weight: bolder;
-}
-.header-content {
-  margin-top: 1rem;
-  color: #fff;
-  width: 50%;
-  height: auto;
+table {
+  align-items: center;
+  overflow-wrap: break-word;
   margin: auto;
-  padding: 0.5rem 0;
-  font-size: large;
-  text-align: center;
-  border: 3px solid #aaa;
-  display: table;
-}
-.header-content p,
-.item-content p {
-  display: inline;
-  vertical-align: middle;
-}
-.header-left {
-  border-radius: 1rem 0 0 0;
-}
-.header-right {
-  border-radius: 0 1rem 0 0;
-  border-left: none;
+  margin-top: 1rem;
+  width: 50vw;
+  border-spacing: 0;
+  color: white;
 }
 
-.table-item {
-  color: #fff;
-  background: #444;
-  display: flex;
+.table-header {
+  background: #6aace9;
+}
+
+.header-content,
+.table-item,
+.item-content {
   width: 50%;
+}
+.header-content {
+  font-size: large;
+  height: 3rem;
+  font-weight: bolder;
+}
+
+.header-left {
+  border: 3px solid #aaa;
+  border-radius: 1rem 0 0 0;
+}
+
+.header-right {
+  border: 3px solid #aaa;
+  border-radius: 0 1rem 0 0;
+  border-left: 0;
+}
+.loading {
+  width: 100%;
+  background: #444;
+}
+.table-item {
+  background: #444;
   font-size: medium;
 }
+
 .item-content {
-  padding: 5px;
-  width: 50%;
+  padding: 10px;
   height: auto;
   text-align: center;
-  display: table;
   border: 3px solid #aaa;
   border-top: none;
 }
+
 .item-right {
   border-left: none;
   padding: 0.5rem 0;
   font-weight: bold;
 }
-.item-right img {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-left: 0.5rem;
-  vertical-align: middle;
-}
 
 .last-item {
   border-radius: 0 0 1rem 1rem;
 }
+
 .last-item-left {
   border-radius: 0 0 0 1rem;
 }
+
 .last-item-right {
   border-radius: 0 0 1rem 0;
-}
-.table {
-  overflow-wrap: break-word;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .item-red {
@@ -100,7 +92,7 @@ body {
 .table-btn {
   outline: none;
   margin-top: 0.5rem;
-  width: 50%;
+  width: 100%;
   height: 3rem;
   border-radius: 1rem;
   border: 3px #aaa solid;
@@ -110,22 +102,22 @@ body {
   transition: transform 200ms ease-out, background 200ms ease-out,
     font-weight 200ms ease-out;
 }
+
 .table-btn:hover {
   font-weight: bolder;
   background: #6aace9;
   transform: scale(102%);
 }
+
 .table-btn:active {
   background: #489ceb;
   transform: translate(0px, 5px);
 }
+
 .loading {
-  display: flex;
+  text-align: center;
   color: #fff;
   font-size: x-large;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
   height: 4rem;
   background: #444;
   border-top: 0;
@@ -133,15 +125,12 @@ body {
   border: 3px solid #aaa;
 }
 
-@media only screen and (max-width: 800px) {
-  .table-header,
-  .table-item {
-    width: 90%;
-  }
-  .table-btn {
-    width: 90%;
-  }
-  .loading {
-    width: 90%;
+.loading td {
+  border-radius: inherit;
+}
+
+@media screen and (max-width: 780px) {
+  table {
+    width: 90vw;
   }
 }
