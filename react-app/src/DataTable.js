@@ -38,21 +38,23 @@ function DataTable() {
           })}
           <Loading isLoading={isLoading} />
         </tbody>
-        <tr>
-          <td colSpan='2'>
-            <button
-              type='button'
-              onClick={() => {
-                setData([])
-                setIsLoading(true)
-                getData()
-              }}
-              className='table-btn'
-            >
-              Refresh
-            </button>
-          </td>
-        </tr>
+        <tfoot>
+          <tr>
+            <td colSpan='2'>
+              <button
+                type='button'
+                onClick={() => {
+                  setData([])
+                  setIsLoading(true)
+                  getData()
+                }}
+                className='table-btn'
+              >
+                Refresh
+              </button>
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </>
   )
