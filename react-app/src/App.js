@@ -4,6 +4,8 @@ import './index.css'
 import Homepage from './Homepage'
 import NavBar from './NavBar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ErrorPage from './ErrorPage'
+
 function App() {
   return (
     <Router>
@@ -15,8 +17,5 @@ function App() {
       </Routes>
     </Router>
   )
-}
-function ErrorPage() {
-  return <h1>Error</h1>
 }
 export default App
