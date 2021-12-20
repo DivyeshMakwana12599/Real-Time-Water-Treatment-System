@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Loading from './Loading'
 import TableHeader from './TableHeader'
 import TableItem from './TableItem'
-
+import NavBar from './NavBar'
 const url =
   'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com'
 
@@ -26,6 +26,7 @@ function DataTable() {
   }, [])
   return (
     <>
+      <NavBar navFor='process' />
       <table>
         <thead>
           <TableHeader />

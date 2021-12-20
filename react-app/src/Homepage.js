@@ -4,6 +4,7 @@ import './homepage.css'
 import logo from './images/logo.png'
 import heroImg from './images/water-treatment-plant.jpg'
 import { Link } from 'react-router-dom'
+import NavBar from './NavBar'
 
 function Homepage() {
   return (
@@ -12,15 +13,7 @@ function Homepage() {
       <p className='img-caption'>
         Water is the driving force of all&nbsp;nature
       </p>
-      <Link to='/' className='logo'>
-        <img src={logo} alt='logo of the company' />
-      </Link>
-      <span className='home-nav'>
-        <Link to='/'>process</Link>
-        <Link to='/'>about</Link>
-        <Link to='/'>contact us</Link>
-      </span>
-
+      <NavBar navFor='homepage' />
       <Link to='/pipe' className='link-pipe'>
         pipelines current status
       </Link>

@@ -4,11 +4,6 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.inline {
-  display: inline;
-  padding-left: 0.2rem;
-}
-
 .link-pipe {
   width: 100%;
   display: block;
@@ -30,28 +25,9 @@ body {
   filter: brightness(50%);
 }
 
-a:hover {
-  color: black;
-}
-
 .homepage {
   height: 100vh;
   position: relative;
-}
-
-.logo img {
-  -webkit-user-drag: none;
-  vertical-align: middle;
-  height: 3rem;
-}
-
-.logo,
-.home-nav {
-  font-weight: bold;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: white;
-  font-size: 1.5rem;
 }
 
 .img-caption {
@@ -70,30 +46,7 @@ a:hover {
   color: black;
 }
 
-.logo {
-  position: absolute;
-  top: 0.2rem;
-  left: 1rem;
-}
-
-.home-nav {
-  float: right;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  width: 60%;
-  justify-content: right;
-  gap: 1rem;
-}
 @media screen and (max-width: 780px) {
-  .logo,
-  .home-nav {
-    font-size: 0.85rem;
-  }
-  .home-nav {
-    gap: 0.8rem;
-  }
   .img-caption {
     right: 2rem;
     font-size: 2rem;
