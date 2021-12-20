@@ -1,7 +1,6 @@
 import React from 'react'
 import './normalize.css'
 import './homepage.css'
-import logo from './images/logo.png'
 import heroImg from './images/water-treatment-plant.jpg'
 import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
