@@ -23,19 +23,19 @@ function NavBar({ navFor }) {
       </Link>
       <span className='home-nav'>
         <Link
-          to='/'
+          to='/process'
           className={navFor === 'process' ? 'nav-item active' : 'nav-item'}
         >
           process
         </Link>
         <Link
-          to='/'
+          to='/about'
           className={navFor === 'about' ? 'nav-item active' : 'nav-item'}
         >
           about
         </Link>
         <Link
-          to='/'
+          to='/contact'
           className={navFor === 'contact' ? 'nav-item active' : 'nav-item'}
         >
           contact us
