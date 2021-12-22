@@ -28,11 +28,7 @@ function About() {
           </a>
         </div>
         <div className='partition partition-image'>
-          <img
-            className='pipe-image'
-            src={pipeImg}
-            alt='image of pipe with a liver'
-          />
+          <img className='pipe-image' src={pipeImg} alt='sedimentation tanks' />
         </div>
       </div>
     </>
