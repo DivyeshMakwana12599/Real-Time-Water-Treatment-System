@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap');
+
+.body {
+  background: #eaeaea;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  height: 75vh;
+}
+
+.partition {
+  width: 50%;
+}
+
+.pipe-image {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.box {
+  z-index: 1;
+  overflow: visible;
+  position: relative;
+  top: 10vh;
+  left: 10vw;
+  color: white;
+  background-color: rgba(204, 58, 0, 0.925);
+  padding: 1rem;
+  width: 55vw;
+  height: 30vh;
+}
+
+.title {
+  margin: 2rem 0 0.5rem 0.8rem;
+  font-family: 'Source Code Pro';
+  font-size: medium;
+  font-weight: bold;
+}
+
+.welcome {
+  margin: 0 0 0.5rem 0.8rem;
+  font-size: 5.5rem;
+  font-weight: bold;
+}
+
+.description {
+  position: relative;
+  font-style: italic;
+  width: 30ch;
+  top: 13vh;
+  left: 10vw;
+}
+.read-more {
+  position: relative;
+  padding: 0.4rem 2rem;
+  text-transform: uppercase;
+  color: white;
+  background: #444;
+  font-weight: 400;
+  top: 16vh;
+  left: 10vw;
+}
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column-reverse;
+    margin-bottom: 15vh;
+  }
+  .box {
+    position: absolute;
+    top: 15vh;
+    width: 80vw;
+  }
+  .title {
+    font-size: small;
+  }
+  .welcome {
+    font-size: 3.5rem;
+  }
+  .description {
+    top: 3vh;
+    font-size: smaller;
+  }
+  .read-more {
+    top: 7vh;
+    font-size: medium;
+  }
+  .partition-content {
+    height: 20vh;
+  }
+  .partition-image {
+    width: 100%;
+  }
+}

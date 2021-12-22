@@ -1,7 +1,7 @@
 import React from 'react'
 import './NavBar.css'
 import { Link } from 'react-router-dom'
-import logo from './images/logo.png'
+import logo from './images/water1.png'
 
 const style = {
   homepage: {
@@ -20,6 +20,7 @@ function NavBar({ navFor }) {
     >
       <Link to='/' className='logo'>
         <img src={logo} alt='logo of the company' />
+        <p>WTS</p>
       </Link>
       <span className='home-nav'>
         <Link
