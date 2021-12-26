@@ -36,6 +36,7 @@ function ContactPageForm() {
         message,
         id: new Date().getTime().toString(),
       }
+      console.log(query)
       setEmail('')
       setMessage('')
       setNumber('')
