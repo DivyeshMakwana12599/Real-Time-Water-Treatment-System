@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+.About_container {
+  display: flex;
+  width: 100%;
+}
+
+.About_partition-left,
+.About_partition-right {
+  height: calc(100vh - 3rem);
+}
+
+.About_partition-left {
+  display: grid;
+  color: white;
+  background: #000;
+  width: 30%;
+  padding: 3rem 0 1rem 0;
+}
+
+.About_day {
+  text-transform: capitalize;
+}
+
+.About_time-component {
+  margin-top: 1rem;
+}
+
+.About_time-component,
+.About_address {
+  position: relative;
+  left: 5vw;
+}
+.About_contact {
+  width: 50ch;
+  margin: 3rem 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  left: 10vh;
+}
+.About_form-item {
+  display: flex;
+  flex-direction: column;
+}
+.About_address {
+  width: 20vw;
+  text-transform: uppercase;
+}
+
+.About_partition-right {
+  display: flex;
+  flex-direction: column;
+  width: 1fr;
+}
+.About_form {
+  position: relative;
+  left: 10vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.About_submit-btn:hover {
+  background: white;
+  color: black;
+}
+.About_submit-btn {
+  width: fit-content;
+  padding: 6px 12px;
+  color: white;
+  background: #000;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: background-color 400ms ease;
+  position: relative;
+  left: calc(50vw - 80px);
+  margin-top: 0.3rem;
+}
+.About_message {
+  height: 30vh;
+}
+
+.About_input {
+  border-radius: 4px;
+  padding: 6px 10px;
+  border: 1px solid grey;
+}
+
+@media only screen and (max-width: 800px) {
+  .About_partition-left {
+    align-items: center;
+    grid-template-columns: 2fr 1fr 1fr;
+    height: auto;
+    padding: 1.8rem 0;
+  }
+  .About_partition-left,
+  .About_partition-right {
+    height: auto;
+    width: 100%;
+  }
+  .About_container {
+    flex-direction: column-reverse;
+  }
+  .About_address-grid {
+    justify-items: center;
+    padding: 0 2rem;
+    grid-row: 1 / 4;
+  }
+  .About_time-component {
+    margin: 0;
+    justify-items: start;
+  }
+  .About_time-component,
+  .About_address,
+  .About_form,
+  .About_contact {
+    position: static;
+  }
+  .About_partition-right {
+    margin: 2rem 0 2rem 2rem;
+  }
+
+  .About_address {
+    width: 100%;
+  }
+  .About_form {
+    width: 80vw;
+  }
+}

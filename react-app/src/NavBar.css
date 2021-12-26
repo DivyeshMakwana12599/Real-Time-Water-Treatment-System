@@ -8,7 +8,7 @@
   font-weight: bold;
   text-transform: capitalize;
   height: 3rem;
-  width: 100vw;
+  width: 100%;
 }
 
 .logo {
@@ -49,9 +49,17 @@
   height: 2rem;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (min-width: 400px) and (max-width: 800px) {
   .nav-bar {
     font-size: small;
+  }
+  .nav-item {
+    padding: 0 0.2rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .nav-bar {
+    font-size: x-small;
   }
   .nav-item {
     padding: 0 0.2rem;

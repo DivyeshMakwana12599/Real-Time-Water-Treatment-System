@@ -9,19 +9,23 @@ function About() {
   useEffect(() => {
     Aos.init({ duration: 2000 })
   }, [])
+  return <WelcomeLayout />
+}
+
+function WelcomeLayout() {
   return (
     <>
       <NavBar navFor='about' />
       <div className='container'>
         <div className='partition partition-content'>
           <div className='box'>
-            <p className='title'>Water Treatmetn System</p>
+            <p className='title'>Water Treatment System</p>
             <p className='welcome'>Welcome!</p>
           </div>
           <p className='description'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            molestiae suscipit officia. Voluptatum temporibus, numquam officiis
-            deserunt consequatur tempora iste!
+            This project tries to solve the problem of impurity in water. We
+            have created a water monitoring/treatment API system to cater to it
+            and try to solve the problem.
           </p>
           <a href='#main' className='read-more'>
             Read more

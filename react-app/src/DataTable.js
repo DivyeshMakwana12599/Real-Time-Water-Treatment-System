@@ -7,9 +7,6 @@ const url =
   'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com'
 
 function DataTable() {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-
   async function getData() {
     try {
       const responce = await fetch(url + '/api/pipe')
@@ -20,9 +17,14 @@ function DataTable() {
       console.log(e)
     }
   }
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getData()
+    const interval = setInterval(() => getData(), 10000)
+    // getData()
+    return () => clearInterval(interval)
   }, [])
   return (
     <>
