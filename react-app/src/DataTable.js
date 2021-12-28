@@ -3,29 +3,13 @@ import Loading from './Loading'
 import TableHeader from './TableHeader'
 import TableItem from './TableItem'
 import NavBar from './NavBar'
+import { useFetch } from './useFetech'
+
 const url =
   'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com'
 
 function DataTable() {
-  async function getData() {
-    try {
-      const responce = await fetch(url + '/api/pipe')
-      const result = await responce.json()
-      setData(result)
-      setIsLoading(false)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    getData()
-    const interval = setInterval(() => getData(), 10000)
-    // getData()
-    return () => clearInterval(interval)
-  }, [])
+  const { isLoading, data } = useFetch(url)
   return (
     <>
       <NavBar navFor='process' />
@@ -44,15 +28,7 @@ function DataTable() {
         <tfoot>
           <tr>
             <td colSpan='2'>
-              <button
-                type='button'
-                onClick={() => {
-                  setData([])
-                  setIsLoading(true)
-                  getData()
-                }}
-                className='table-btn'
-              >
+              <button type='button' onClick={() => {}} className='table-btn'>
                 Refresh
               </button>
             </td>

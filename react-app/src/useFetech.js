@@ -1,22 +1,25 @@
 import { useState, useEffect, useCallback } from 'react'
 
 export const useFetch = (url) => {
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
-
-  const getData = useCallback(async () => {
+  async function getData() {
     try {
-      const response = await fetch(url)
-      const result = await response.json()
+      const responce = await fetch(url + '/api/pipe')
+      const result = await responce.json()
       setData(result)
-      setLoading(false)
+      setIsLoading(false)
     } catch (e) {
       console.log(e)
     }
-  }, [url])
+  }
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getData()
-  }, [url, getData])
-  return { loading, data }
+    const interval = setInterval(() => getData(), 10000)
+    // getData()
+    return () => clearInterval(interval)
+  }, [url])
+
+  return { isLoading, data }
 }
