@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Loading from './Loading'
 import TableHeader from './TableHeader'
 import TableItem from './TableItem'
