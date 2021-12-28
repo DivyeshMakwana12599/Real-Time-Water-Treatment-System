@@ -67,6 +67,13 @@ table {
   border-left: none;
   padding: 0.5rem 0;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.item-right p {
+  transition: height 500ms ease;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .last-item {

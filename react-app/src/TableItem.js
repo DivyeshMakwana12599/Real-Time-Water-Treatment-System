@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function checkState({ temperature, orp, ph, turbidity, conductivity }) {
-  const FILTERED = ['FILTERED', 'item-green']
-  const CONTAMINATED = ['CONTAMINATED', 'item-red']
+  const FILTERED = [<p style={{ height: '1.3rem' }}>FILTERED</p>, 'item-green']
+  const CONTAMINATED = [
+    <p style={{ height: '1.3rem' }}>CONTAMINATED</p>,
+    'item-red',
+  ]
+
+  const obj = (
+    <p style={{ height: '6rem' }}>
+      Temperature: {temperature[temperature.length - 1] || 'null'}
+      <br />
+      ORP: {orp[orp.length - 1] || 'null'}
+      <br />
+      PH: {ph[ph.length - 1] || 'null'}
+      <br />
+      Turbidity: {turbidity[turbidity.length - 1] || 'null'}
+      <br />
+      Conductivity: {conductivity[conductivity.length - 1] || 'null'}
+    </p>
+  )
+  FILTERED.push(obj)
+  CONTAMINATED.push(obj)
   if (
     temperature[temperature.length - 1] !== null &&
     (temperature[temperature.length - 1] < 30 ||
@@ -36,17 +55,31 @@ function checkState({ temperature, orp, ph, turbidity, conductivity }) {
 
 function TableItem({ city, area, pipeID, sensorValues, className }) {
   const state = checkState(sensorValues)
+  const [data, setData] = useState(state[0])
+  const handleClick = (e) => {
+    if (
+      data.props.children === 'CONTAMINATED' ||
+      data.props.children === 'FILTERED'
+    ) {
+      setData(state[2])
+    } else setData(state[0])
+  }
   return (
     <tr className={'table-item ' + className}>
       <td className={'item-content item-left ' + className + '-left'}>
-        <p>{city + ', ' + area + ', pipeID= ' + pipeID}</p>
+        <p>
+          City: {city} <br />
+          Area: {area} <br />
+          pipeID: {pipeID}
+        </p>
       </td>
       <td
         className={
           'item-content item-right ' + className + '-right ' + state[1]
         }
+        onClick={handleClick}
       >
-        <p>{state[0]}</p>
+        {data}
       </td>
     </tr>
   )
