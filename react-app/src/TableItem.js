@@ -68,9 +68,9 @@ function TableItem({ city, area, pipeID, sensorValues, className }) {
     <tr className={'table-item ' + className}>
       <td className={'item-content item-left ' + className + '-left'}>
         <p>
-          City: {city} <br />
-          Area: {area} <br />
-          pipeID: {pipeID}
+          City - {city} <br />
+          Area - {area} <br />
+          pipeID - {pipeID}
         </p>
       </td>
       <td

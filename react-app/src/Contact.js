@@ -6,7 +6,7 @@ const phoneNumbers = [
   { day: 'monday', time: '9:00 to 5:00' },
   { day: 'tuesday', time: '9:00 to 5:00' },
   { day: 'wednesday', time: '9:00 to 5:00' },
-  { day: 'thrusday', time: '9:00 to 5:00' },
+  { day: 'thursday', time: '9:00 to 5:00' },
   { day: 'friday', time: '9:00 to 5:00' },
   { day: 'saturday', time: '12:00 to 5:00' },
 ]
