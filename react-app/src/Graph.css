@@ -1,0 +1,20 @@
+.Graph_graph-box {
+  width: 100%;
+  height: 28.125vw;
+}
+
+.Graph_graph-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: calc(50vw - 2rem) calc(50vw - 2rem);
+  place-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .Graph_graph-container {
+    grid-template-columns: calc(100vw - 1.2rem);
+  }
+  .Graph_graph-box {
+    height: 56.25vw;
+  }
+}

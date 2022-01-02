@@ -45,7 +45,9 @@ function ContactPageForm() {
       console.log('empty values')
     }
   }
-
+  const a = []
+  const b = 'hello'
+  const temp = a || b
   return (
     <>
       <div className='About_container'>

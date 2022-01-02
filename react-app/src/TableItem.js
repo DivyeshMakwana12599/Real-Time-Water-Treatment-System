@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function checkState({ temperature, orp, ph, turbidity, conductivity }) {
   const FILTERED = [<p style={{ height: '1.3rem' }}>FILTERED</p>, 'item-green']
@@ -67,11 +68,14 @@ function TableItem({ city, area, pipeID, sensorValues, className }) {
   return (
     <tr className={'table-item ' + className}>
       <td className={'item-content item-left ' + className + '-left'}>
-        <p>
+        <Link
+          to={`/pipe/${city}/${area}/${pipeID}`}
+          style={{ display: 'block' }}
+        >
           City - {city} <br />
           Area - {area} <br />
           pipeID - {pipeID}
-        </p>
+        </Link>
       </td>
       <td
         className={

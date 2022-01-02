@@ -3,6 +3,7 @@ import DataTable from './DataTable'
 import './index.css'
 import Homepage from './Homepage'
 import Process from './Process'
+import Graph from './Graph'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ErrorPage from './ErrorPage'
 import About from './About'
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Homepage />} />
         <Route path='/pipe' element={<DataTable />} />
+        <Route path='/pipe/:city/:area/:pipeID' element={<Graph />} />
         <Route path='/process' element={<Process />} />
         <Route path='/about' element={<About />} />
         <Route path='/Contact' element={<Contact />} />

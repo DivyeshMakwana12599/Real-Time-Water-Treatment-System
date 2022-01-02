@@ -6,7 +6,7 @@ import NavBar from './NavBar'
 import { useFetch } from './useFetech'
 
 const url =
-  'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com'
+  'https://project-cors-fix.herokuapp.com/https://water-treatment-system-api.herokuapp.com/api/pipe'
 
 function DataTable() {
   const { isLoading, data } = useFetch(url)
